@@ -1,9 +1,14 @@
 const express = require('express');
-const db = require('./utils/database')
+const db = require('./utils/database');
+const dotenv = require ('dotenv');
 const app = express();
-const port = 9001;
+
+dotenv.config();
+
+const port = process.env.PORT;
 
 const userRouter = require('./users/users.router')
+
 
 db.authenticate().
     then(()=> {
