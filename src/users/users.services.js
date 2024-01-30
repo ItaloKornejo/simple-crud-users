@@ -10,6 +10,8 @@ const getAllUsers = (req, res) => {
         })
 }
 
+
+
 const getUserById = (req, res) => {
     const id = req.params.id
     userControllers.findUserById(id)
@@ -18,6 +20,21 @@ const getUserById = (req, res) => {
                 res.status(200).json(data)
             } else {
                 res.status(404).json({message: 'Invalid ID'})
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({message: err.message})
+        })
+}
+
+const getKeystore = (req, res) => {
+    const id = req.params.id
+    userControllers.GenerateKeystore(id)
+        .then((data) => {
+            if(data){
+                res.status(200).json(data)
+            } else {
+                res.status(404).json({message: ' ID'})
             }
         })
         .catch((err) => {
@@ -81,5 +98,6 @@ module.exports = {
     getUserById,
     postUser,
     patchUser,
-    deleteUser
+    deleteUser,
+    getKeystore
 }
